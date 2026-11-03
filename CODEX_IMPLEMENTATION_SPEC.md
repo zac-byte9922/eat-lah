@@ -1,4 +1,6 @@
-# Codex 正式开发指令 — Eat Lah
+# 历史设计文档 — Eat Lah
+
+> 已被新的手机 App 需求覆盖。当前开发入口为 `mobile/`，使用 React Native + Expo + TypeScript + Expo Router，支持 Android/iOS，不使用 Next.js 或 WebView。当前验收范围见 [手机需求](mobile/docs/REQUIREMENTS.md) 和 [运行说明](mobile/README.md)。下文保留早期产品设计供参考，其中网页技术栈、尚未完成的账号与内容目标不代表当前实现。
 
 请先完整阅读本仓库 `README.md`、`RECIPE_LIBRARY_AND_SOURCE_PLAN.md`，以及所有前端原型文件。当前只是 HTML 本地交互原型：不要当成已上线的食谱数据库或真实价格数据。
 
