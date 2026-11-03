@@ -1,0 +1,31 @@
+const vm=require('node:vm'),fs=require('fs'),path=require('path');
+function make(initial){
+ const events={};const app={innerHTML:'',addEventListener:(ev,fn)=>events[ev]=fn};
+ const store={'eat-lah-v1':JSON.stringify(initial)};
+ const c={window:{scrollTo(){}},document:{getElementById:id=>id==='app'?app:null,querySelector:()=>null,body:{appendChild(){}},createElement:()=>({remove(){},select(){}})},localStorage:{getItem:x=>store[x],setItem:(x,v)=>store[x]=v,removeItem:x=>delete store[x]},Intl,Date,Math,Array,Object,String,Number,Boolean,JSON,RegExp,Set,Map,URL,encodeURIComponent,setTimeout:()=>{},confirm:()=>true,console,navigator:{}};
+ vm.createContext(c);for(const f of ['data.js','data-extra.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,f),'utf8'),c,{filename:f});
+ const click=(action,extras={})=>{const t={dataset:{action,...extras},classList:{contains:()=>false},closest:()=>t};events.click({target:t})};
+ const have=(t)=>{if(!app.innerHTML.includes(t))throw Error('Expected '+t+' in '+app.innerHTML.slice(0,500));};
+ return {c,click,have,app,events};
+}
+const ui=make({profileCompleted:false,profile:{postal:'138611'}});
+ui.have('有冷藏 / Refrigeration');ui.have('有冷冻（也有冷藏）');ui.have('都没有 / Neither');ui.click('setup-next');ui.have('S$70 · 日常');ui.have('约 600 · 常规');ui.have('一人每周自炊买菜');
+ui.events.click({target:(()=>{const t={dataset:{budgetPreset:'70'},classList:{contains:()=>false},closest:()=>t};return t})()});
+ui.events.click({target:(()=>{const t={dataset:{kcalPreset:'0'},classList:{contains:()=>false},closest:()=>t};return t})()});
+if(ui.c.window.EATLAH_TEST.getState().profile.budget!==70)throw Error('budget preset');
+if(ui.c.window.EATLAH_TEST.getState().profile.kcal!==0)throw Error('kcal preset');
+ui.events.click({target:(()=>{const t={dataset:{set:'storage',value:'freezer'},classList:{contains:()=>false},closest:()=>t};return t})()});
+if(ui.c.window.EATLAH_TEST.getState().profile.storage!=='freezer')throw Error('storage');
+ui.click('setup-next');ui.have('平时喜欢什么味道？');if(ui.app.innerHTML.includes('通常在哪买菜'))throw Error('retailer choice not removed');
+ui.click('setup-next');ui.click('setup-next');ui.have('今天吃哪一顿？');
+ui.click('choose-slot',{slot:'lunch'});ui.have('午餐 · 今天想怎么吃？');
+ui.click('choose-effort',{value:'cook'});ui.have('午餐 · 想吃哪种？');
+ui.click('choose-mood',{value:'normal'});ui.have('选这顿的主食');
+ui.click('flow-back');ui.have('午餐 · 想吃哪种？');ui.click('flow-back');ui.have('午餐 · 今天想怎么吃？');
+ui.click('choose-effort',{value:'lazy'});ui.have('这顿怎么解决？');ui.click('lazy-home');ui.have('家里简单吃');
+ui.click('flow-accept');ui.have('午餐 · 选好了');ui.click('save-meal');ui.have('搜索附近超市');ui.have('138611');
+ui.click('confirm-shopping');ui.have('午餐 · 开始做饭');ui.click('finish-cooking');ui.have('今天吃了吗？');
+if(ui.c.window.EATLAH_TEST.getState().logs.length!==1)throw Error('did not log');
+ui.click('open-home');ui.click('choose-slot',{slot:'dinner'});ui.click('choose-effort',{value:'lazy'});ui.click('lazy-out');ui.have('出去吃');
+ui.click('log-external',{slot:'dinner'});if(ui.c.window.EATLAH_TEST.getState().logs.length!==2)throw Error('external meal');
+console.log('PASS v1.2 onboarding profile, 2 mode flow, mood & swipe, no supermarket preference, maps postcode, grocery/cook/log, external path.');

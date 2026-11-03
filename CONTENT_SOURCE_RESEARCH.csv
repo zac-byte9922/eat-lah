@@ -1,0 +1,12 @@
+source_type,topic,source_url,use_policy,review_status
+Douyin,螺蛳粉炸蛋灵感,https://www.douyin.com/shipin/7287103354210322489,仅作选题参考不搬运视频字幕封面,needs_permission_for_media
+Douyin,空气炸锅土豆香肠灵感,https://www.douyin.com/shipin/7349290074292488227,仅作选题参考不搬运视频字幕封面,needs_permission_for_media
+Douyin,空气炸锅鸡腿灵感,https://www.douyin.com/shipin/7306012176035203123,仅作选题参考不搬运视频字幕封面,needs_permission_for_media
+XiaChuFang,一人食韩式小锅,https://m.xiachufang.com/recipe/107220347/,仅作主题发现步骤需独立编写核验,needs_permission_for_media
+XiaChuFang,宿舍小电锅煲仔饭,https://m.xiachufang.com/recipe/106643654/,仅作主题发现需检查具体锅具是否支持,needs_permission_for_media
+XiaChuFang,螺蛳粉加炸蛋,https://m.xiachufang.com/recipe/107275715/,仅作主题发现避免直接复制,needs_permission_for_media
+XiaChuFang,肥牛粉丝煲,https://m.xiachufang.com/recipe/106809184/,仅作主题发现步骤需独立编写核验,needs_permission_for_media
+XiaChuFang,一人食灵感列表,https://m.xiachufang.com/category/1012723/,选题集合非可转载数据库,discovery_only
+BBC Good Food,学生快手食谱集合,https://www.bbcgoodfood.com/recipes/collection/quick-student-recipes,选题集合非内容授权,discovery_only
+Supermarket,Scarlett 新加坡门店,https://www.scarlettsupermarket.com.sg/,官方门店信息可用于人工核验不可宣称实时价格,verify_before_publish
+Store Listing,Hong Fu Mart 部分亚超商品,https://mart.grab.com/sg/en/merchant/hong-fu-mart-west-coast-plaza/4-C76CGP3ABENXUE,观察商品与包装候选不可宣称实时有货,verify_before_publish
