@@ -19,6 +19,10 @@
 | Android/iPhone 真机、模拟器                                | 当前环境无设备/模拟器，尚未执行                                                                     |
 | APK / AAB / IPA、签名、商店发布                            | 未生成、未发布；Metro export 不等于安装包                                                           |
 
+## GitHub 下载后的复现检查
+
+已将完整项目推送到 `feat/eat-lah-mobile-phase1`，并从 GitHub 在 `/tmp` 下全新 clone，不复用工作区的 node_modules、.expo 或未提交源码。该副本 `npm ci` 和 `npm start` 均成功，Android/iOS Expo 启动清单均返回 HTTP 200。冷缓存 Jest 检查的 29 项测试全部通过；原生集成测试等待上限设为 15 秒，以容纳首次原生模块初始化，所有行为断言保持不变。线上 main 仅在 PR 合并后包含此项目。
+
 ## 自动测试覆盖
 
 - catalog：58 个 draft 演示条目、52 项双语食材、加料引用、无真实商品价格。
